@@ -6,14 +6,9 @@
 /** @var \Vendic\HyvaCheckoutCreateAccount\Magewire\CreateAccount $magewire */
 /** @var \Vendic\HyvaCheckoutCreateAccount\ViewModel\GuestChecker $guestCheckerViewModel */
 $guestCheckerViewModel = $viewModels->require(\Vendic\HyvaCheckoutCreateAccount\ViewModel\GuestChecker::class);
-
-if (!$guestCheckerViewModel->isCustomerGuest()) {
-    return;
-}
-
 ?>
 <div>
-    <?php if (!$magewire->accountExists): ?>
+    <?php if ($guestCheckerViewModel->isCustomerGuest() && !$magewire->accountExists): ?>
         <div class="flex gap-x-4">
             <div class="flex items-center">
                 <?= $block->getChildHtml('checkbox') ?>
