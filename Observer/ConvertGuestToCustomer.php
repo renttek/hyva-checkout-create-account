@@ -61,6 +61,7 @@ class ConvertGuestToCustomer implements ObserverInterface
         /** @var \Magento\Sales\Model\Order $order */
         $order = $observer->getEvent()->getOrder();
         $order->setCustomerId($customer->getId());
+        $order->setCustomerGroupId($customer->getGroupId());
 
         if ($this->newAccountConfig->sendPasswordMailEnabled()) {
             $this->sendPasswordResetEmail($customer->getEmail());
